@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { probarConexion } = require('./database');
+const { sequelize, probarConexion } = require('./database');
 require('./modelos/relaciones'); // importante para registrar las asociaciones
 
 const app = express();
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 });
 
 probarConexion()
+  .then(() => sequelize.sync()) // 👈 esto crea las tablas si no existen
   .then(() => {
     app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
   })
