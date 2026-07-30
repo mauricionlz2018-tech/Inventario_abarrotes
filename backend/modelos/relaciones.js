@@ -5,11 +5,11 @@ const Producto = require('./Producto');
 const Venta = require('./Venta');
 const DetalleVenta = require('./DetalleVenta');
 
-Categoria.hasMany(Producto, { foreignKey: 'id_categoria' });
-Producto.belongsTo(Categoria, { foreignKey: 'id_categoria' });
+Categoria.hasMany(Producto, { foreignKey: 'id_categoria', as: 'productos' });
+Producto.belongsTo(Categoria, { foreignKey: 'id_categoria', as: 'categoria' });
 
-Proveedor.hasMany(Producto, { foreignKey: 'id_proveedor' });
-Producto.belongsTo(Proveedor, { foreignKey: 'id_proveedor' });
+Proveedor.hasMany(Producto, { foreignKey: 'id_proveedor', as: 'productos' });
+Producto.belongsTo(Proveedor, { foreignKey: 'id_proveedor', as: 'proveedor' });
 
 Usuario.hasMany(Venta, { foreignKey: 'id_usuario' });
 Venta.belongsTo(Usuario, { foreignKey: 'id_usuario' });

@@ -1,9 +1,19 @@
 <%- include('partials/header', { titulo: 'Inicio - Abarrotes' }) %>
 
-<div class="text-center mt-5">
-  <h1>Sistema de Gestión de Inventario</h1>
-  <p class="lead">Bienvenido al panel de administración de la abarrotería.</p>
-  <a href="/productos" class="btn btn-primary">Ver Productos</a>
-</div>
+<section class="hero-panel mb-4">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-8">
+      <span class="badge hero-badge mb-3">CRUD de inventario</span>
+      <h1 class="display-5 fw-bold mb-3">Sistema web de inventario para abarrotes</h1>
+      <p class="lead mb-4">
+        Controla productos, categorías y proveedores con una interfaz responsive, legible y con contraste alto.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="/productos" class="btn btn-brand btn-lg">Ver productos</a>
+        <a href="/productos/nuevo" class="btn btn-outline-brand btn-lg">Registrar producto</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <%- include('partials/footer') %>

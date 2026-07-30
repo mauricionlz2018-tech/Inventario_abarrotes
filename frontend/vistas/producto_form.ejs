@@ -1,0 +1,78 @@
+<%- include('partials/header', { titulo: producto ? 'Editar producto' : 'Nuevo producto' }) %>
+
+<section class="section-header mb-4">
+  <span class="section-kicker"><%= producto ? 'Actualización' : 'Registro' %></span>
+  <h1 class="h2 mb-1"><%= producto ? 'Editar producto' : 'Nuevo producto' %></h1>
+  <p class="text-muted mb-0">Completa los datos obligatorios para guardar el producto en el inventario.</p>
+</section>
+
+<div class="form-card">
+  <form action="<%= producto ? `/productos/actualizar/${producto.id_producto}` : '/productos' %>" method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre_producto" class="form-label">Nombre del producto</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nombre_producto"
+        name="nombre_producto"
+        maxlength="100"
+        required
+        value="<%= producto ? producto.nombre_producto : '' %>"
+      >
+    </div>
+
+    <div class="col-md-3">
+      <label for="id_categoria" class="form-label">Categoría</label>
+      <select class="form-select" id="id_categoria" name="id_categoria" required>
+        <option value="">Selecciona una categoría</option>
+        <% categorias.forEach(categoria => { %>
+          <option value="<%= categoria.id_categoria %>" <%= producto && Number(producto.id_categoria) === Number(categoria.id_categoria) ? 'selected' : '' %>><%= categoria.nombre_categoria %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label for="id_proveedor" class="form-label">Proveedor</label>
+      <select class="form-select" id="id_proveedor" name="id_proveedor" required>
+        <option value="">Selecciona un proveedor</option>
+        <% proveedores.forEach(proveedor => { %>
+          <option value="<%= proveedor.id_proveedor %>" <%= producto && Number(producto.id_proveedor) === Number(proveedor.id_proveedor) ? 'selected' : '' %>><%= proveedor.nombre_empresa %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label for="precio_compra" class="form-label">Precio compra</label>
+      <input type="number" step="0.01" min="0" class="form-control" id="precio_compra" name="precio_compra" required value="<%= producto ? producto.precio_compra : '' %>">
+    </div>
+
+    <div class="col-md-3">
+      <label for="precio_venta" class="form-label">Precio venta</label>
+      <input type="number" step="0.01" min="0" class="form-control" id="precio_venta" name="precio_venta" required value="<%= producto ? producto.precio_venta : '' %>">
+    </div>
+
+    <div class="col-md-2">
+      <label for="stock_actual" class="form-label">Stock actual</label>
+      <input type="number" min="0" class="form-control" id="stock_actual" name="stock_actual" required value="<%= producto ? producto.stock_actual : 0 %>">
+    </div>
+
+    <div class="col-md-2">
+      <label for="stock_minimo" class="form-label">Stock mínimo</label>
+      <input type="number" min="0" class="form-control" id="stock_minimo" name="stock_minimo" required value="<%= producto ? producto.stock_minimo : 5 %>">
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" role="switch" id="activo" name="activo" value="1" <%= !producto || producto.activo ? 'checked' : '' %>>
+        <label class="form-check-label" for="activo">Activo</label>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+      <button type="submit" class="btn btn-brand">Guardar</button>
+      <a href="/productos" class="btn btn-outline-brand">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,24 +1,54 @@
 <%- include('partials/header', { titulo: 'Lista de Productos' }) %>
-<h1>Productos</h1>
-<a href="/productos/nuevo" class="btn btn-success mb-3">Nuevo Producto</a>
-<div class="table-responsive">
-  <table class="table table-striped">
+<section class="section-header d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+  <div>
+    <span class="section-kicker">Catálogo</span>
+    <h1 class="h2 mb-1">Productos</h1>
+    <p class="text-muted mb-0">Consulta, edita y elimina registros con una vista más clara y responsive.</p>
+  </div>
+  <a href="/productos/nuevo" class="btn btn-brand">Nuevo producto</a>
+</section>
+
+<div class="table-card table-responsive">
+  <table class="table align-middle mb-0 inventory-table">
     <thead>
-      <tr><th>Nombre</th><th>Categoría</th><th>Proveedor</th><th>Stock</th><th>Precio</th><th>Acciones</th></tr>
+      <tr>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Proveedor</th>
+        <th>Stock</th>
+        <th>Precio venta</th>
+        <th>Estado</th>
+        <th class="text-end">Acciones</th>
+      </tr>
     </thead>
     <tbody>
+      <% if (productos.length === 0) { %>
+        <tr>
+          <td colspan="7" class="text-center py-5 text-muted">Todavía no hay productos registrados.</td>
+        </tr>
+      <% } %>
       <% productos.forEach(p => { %>
         <tr>
-          <td><%= p.nombre_producto %></td>
-          <td><%= p.categoria?.nombre_categoria %></td>
-          <td><%= p.proveedor?.nombre_empresa %></td>
-          <td><%= p.stock_actual %></td>
-          <td>$<%= p.precio_venta %></td>
           <td>
-            <a href="/productos/editar/<%= p.id_producto %>" class="btn btn-sm btn-warning">Editar</a>
-            <form action="/productos/eliminar/<%= p.id_producto %>" method="POST" style="display:inline">
-              <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</button>
-            </form>
+            <div class="fw-semibold"><%= p.nombre_producto %></div>
+            <small class="text-muted">ID #<%= p.id_producto %></small>
+          </td>
+          <td><%= p.categoria ? p.categoria.nombre_categoria : 'Sin categoría' %></td>
+          <td><%= p.proveedor ? p.proveedor.nombre_empresa : 'Sin proveedor' %></td>
+          <td><span class="stock-pill"><%= p.stock_actual %></span></td>
+          <td>$<%= Number(p.precio_venta).toFixed(2) %></td>
+          <td>
+            <span class="status-pill <%= p.activo ? 'status-on' : 'status-off' %>">
+              <%= p.activo ? 'Activo' : 'Inactivo' %>
+            </span>
+          </td>
+          <td>
+            <div class="d-flex justify-content-end flex-wrap gap-2">
+              <a href="/productos/editar/<%= p.id_producto %>" class="btn btn-sm btn-outline-brand">Editar</a>
+              <form action="/productos/eliminar/<%= p.id_producto %>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">Eliminar</button>
+              </form>
+            </div>
           </td>
         </tr>
       <% }) %>
