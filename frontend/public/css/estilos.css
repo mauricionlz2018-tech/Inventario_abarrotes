@@ -1,0 +1,6 @@
+body { background-color: #FFFFFF; color: #212529; }
+.btn-primary { background-color: #0D6EFD; border-color: #0D6EFD; }
+.btn-success { background-color: #198754; border-color: #198754; }
+a { color: #0B5ED7; }
+a:hover { color: #0A58CA; }
+/* Responsive extra si se desea */
