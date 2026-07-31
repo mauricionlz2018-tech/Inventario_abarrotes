@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 probarConexion()
-  .then(() => sequelize.sync()) // 👈 esto crea las tablas si no existen
+  .then(() => sequelize.sync())
   .then(() => {
     app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
   })
