@@ -16,11 +16,12 @@
         <th>Usuario</th>
         <th>Rol</th>
         <th>Estado</th>
+        <th class="text-end">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <% if (usuarios.length === 0) { %>
-        <tr><td colspan="5" class="text-center py-5 text-muted">No hay usuarios registrados.</td></tr>
+        <tr><td colspan="6" class="text-center py-5 text-muted">No hay usuarios registrados.</td></tr>
       <% } %>
       <% usuarios.forEach(u => { %>
         <tr>
@@ -29,6 +30,14 @@
           <td><%= u.usuario %></td>
           <td><%= u.rol %></td>
           <td><%= u.activo ? 'Activo' : 'Inactivo' %></td>
+          <td>
+            <div class="d-flex justify-content-end flex-wrap gap-2">
+              <a href="/usuarios/editar/<%= u.id_usuario %>" class="btn btn-sm btn-outline-brand">Editar</a>
+              <form action="/usuarios/eliminar/<%= u.id_usuario %>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</button>
+              </form>
+            </div>
+          </td>
         </tr>
       <% }) %>
     </tbody>

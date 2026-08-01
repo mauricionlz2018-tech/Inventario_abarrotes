@@ -16,11 +16,12 @@
         <th>Teléfono</th>
         <th>Correo</th>
         <th>Dirección</th>
+        <th class="text-end">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <% if (proveedores.length === 0) { %>
-        <tr><td colspan="5" class="text-center py-5 text-muted">No hay proveedores registrados.</td></tr>
+        <tr><td colspan="6" class="text-center py-5 text-muted">No hay proveedores registrados.</td></tr>
       <% } %>
       <% proveedores.forEach(p => { %>
         <tr>
@@ -29,6 +30,14 @@
           <td><%= p.telefono %></td>
           <td><%= p.correo || 'Sin correo' %></td>
           <td><%= p.direccion || 'Sin dirección' %></td>
+          <td>
+            <div class="d-flex justify-content-end flex-wrap gap-2">
+              <a href="/proveedores/editar/<%= p.id_proveedor %>" class="btn btn-sm btn-outline-brand">Editar</a>
+              <form action="/proveedores/eliminar/<%= p.id_proveedor %>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este proveedor?')">Eliminar</button>
+              </form>
+            </div>
+          </td>
         </tr>
       <% }) %>
     </tbody>
