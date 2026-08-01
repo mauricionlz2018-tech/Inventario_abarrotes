@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/productos', require('./rutas/productos'));
+app.use('/ventas', require('./rutas/ventas'));
 // app.use('/categorias', require('./rutas/categorias'));
 
 app.get('/', (req, res) => {

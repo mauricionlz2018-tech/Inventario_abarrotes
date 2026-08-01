@@ -1,0 +1,44 @@
+<%- include('partials/header', { titulo: 'Ventas' }) %>
+
+<section class="section-header d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+  <div>
+    <span class="section-kicker">Negocio</span>
+    <h1 class="h2 mb-1">Ventas</h1>
+  </div>
+  <a href="/ventas/nueva" class="btn btn-brand">Nueva venta</a>
+</section>
+
+<div class="table-card table-responsive">
+  <table class="table align-middle mb-0 inventory-table">
+    <thead>
+      <tr>
+        <th># Venta</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (ventas.length === 0) { %>
+        <tr>
+          <td colspan="6" class="text-center py-5 text-muted">Aún no hay ventas registradas.</td>
+        </tr>
+      <% } %>
+      <% ventas.forEach(venta => { %>
+        <% const detalle = venta.detalle_venta && venta.detalle_venta[0] ? venta.detalle_venta[0] : null; %>
+        <tr>
+          <td>#<%= venta.id_venta %></td>
+          <td><%= venta.usuario ? venta.usuario.nombre : 'Sin usuario' %></td>
+          <td><%= new Date(venta.fecha).toLocaleString('es-MX') %></td>
+          <td><%= detalle && detalle.producto ? detalle.producto.nombre_producto : 'Sin detalle' %></td>
+          <td><%= detalle ? detalle.cantidad : 0 %></td>
+          <td>$<%= Number(venta.total).toFixed(2) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

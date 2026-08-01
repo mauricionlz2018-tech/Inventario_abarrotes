@@ -1,0 +1,47 @@
+<%- include('partials/header', { titulo: 'Registrar venta' }) %>
+
+<section class="section-header mb-4">
+  <span class="section-kicker">Caja</span>
+  <h1 class="h2 mb-1">Registrar venta</h1>
+  <p class="text-muted mb-0">Registra una venta rápida para tu tienda de abarrotes.</p>
+</section>
+
+<div class="form-card">
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <form action="/ventas" method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label for="id_usuario" class="form-label">Vendedor</label>
+      <select class="form-select" id="id_usuario" name="id_usuario" required>
+        <option value="">Selecciona un usuario</option>
+        <% usuarios.forEach(usuario => { %>
+          <option value="<%= usuario.id_usuario %>"><%= usuario.nombre %> (<%= usuario.usuario %>)</option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="id_producto" class="form-label">Producto</label>
+      <select class="form-select" id="id_producto" name="id_producto" required>
+        <option value="">Selecciona un producto</option>
+        <% productos.forEach(producto => { %>
+          <option value="<%= producto.id_producto %>"><%= producto.nombre_producto %> — Stock: <%= producto.stock_actual %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="cantidad" class="form-label">Cantidad</label>
+      <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
+    </div>
+
+    <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+      <button type="submit" class="btn btn-brand">Guardar venta</button>
+      <a href="/ventas" class="btn btn-outline-brand">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>
