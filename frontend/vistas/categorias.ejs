@@ -1,0 +1,33 @@
+<%- include('partials/header', { titulo: 'Categorías' }) %>
+<section class="section-header d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+  <div>
+    <span class="section-kicker">Catálogo</span>
+    <h1 class="h2 mb-1">Categorías</h1>
+  </div>
+  <a href="/categorias/nueva" class="btn btn-brand">Nueva categoría</a>
+</section>
+
+<div class="table-card table-responsive">
+  <table class="table align-middle mb-0 inventory-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (categorias.length === 0) { %>
+        <tr><td colspan="3" class="text-center py-5 text-muted">No hay categorías registradas.</td></tr>
+      <% } %>
+      <% categorias.forEach(c => { %>
+        <tr>
+          <td><%= c.id_categoria %></td>
+          <td><%= c.nombre_categoria %></td>
+          <td><%= c.descripcion || 'Sin descripción' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('partials/footer') %>

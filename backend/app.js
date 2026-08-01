@@ -16,6 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/productos', require('./rutas/productos'));
 app.use('/ventas', require('./rutas/ventas'));
+app.use('/categorias', require('./rutas/categorias'));
+app.use('/proveedores', require('./rutas/proveedores'));
+app.use('/usuarios', require('./rutas/usuarios'));
 // app.use('/categorias', require('./rutas/categorias'));
 
 app.get('/', (req, res) => {

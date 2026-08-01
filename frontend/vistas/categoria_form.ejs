@@ -1,0 +1,24 @@
+<%- include('partials/header', { titulo: 'Nueva categoría' }) %>
+<section class="section-header mb-4">
+  <span class="section-kicker">Registro</span>
+  <h1 class="h2 mb-1">Nueva categoría</h1>
+</section>
+
+<div class="form-card">
+  <% if (error) { %><div class="alert alert-danger"><%= error %></div><% } %>
+  <form action="/categorias" method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre_categoria" class="form-label">Nombre de la categoría</label>
+      <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" required>
+    </div>
+    <div class="col-md-6">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <input type="text" class="form-control" id="descripcion" name="descripcion">
+    </div>
+    <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+      <button type="submit" class="btn btn-brand">Guardar</button>
+      <a href="/categorias" class="btn btn-outline-brand">Cancelar</a>
+    </div>
+  </form>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,32 @@
+<%- include('partials/header', { titulo: 'Nuevo proveedor' }) %>
+<section class="section-header mb-4">
+  <span class="section-kicker">Registro</span>
+  <h1 class="h2 mb-1">Nuevo proveedor</h1>
+</section>
+
+<div class="form-card">
+  <% if (error) { %><div class="alert alert-danger"><%= error %></div><% } %>
+  <form action="/proveedores" method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+      <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" required>
+    </div>
+    <div class="col-md-6">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="text" class="form-control" id="telefono" name="telefono" required>
+    </div>
+    <div class="col-md-6">
+      <label for="correo" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="correo" name="correo">
+    </div>
+    <div class="col-md-6">
+      <label for="direccion" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="direccion" name="direccion">
+    </div>
+    <div class="col-12 d-flex flex-wrap gap-2 pt-2">
+      <button type="submit" class="btn btn-brand">Guardar</button>
+      <a href="/proveedores" class="btn btn-outline-brand">Cancelar</a>
+    </div>
+  </form>
+</div>
+<%- include('partials/footer') %>
